@@ -1,15 +1,14 @@
-import lms.collection.immutable.TupleOps
+import lms.collection.immutable.{CppCodeGen_Tuple, TupleOps}
 import lms.core.stub._
 import lms.macros.SourceContext
 import lms.core.{Backend, virtualize}
-import lms.thirdparty.CCodeGenLibFunction
 
 object Main {
   def main(args: Array[String]): Unit = { // Remember to pass string arg
     val arg = args(0)
-    val snippet = new DslDriverC[Int, Unit] with TupleOps {
+    val snippet = new DslDriverCPP[Int, Unit]  with TupleOps {
       q =>
-      override val codegen = new DslGenC with CCodeGenLibFunction {
+      override val codegen = new DslGenCPP with CppCodeGen_Tuple {
         val IR: q.type = q
       }
 
