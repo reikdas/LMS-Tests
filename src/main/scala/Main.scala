@@ -1,4 +1,4 @@
-import lms.collection.immutable.{CppCodeGen_List, ListOps, TupleOps}
+import lms.collection.immutable.{CppCodeGen_List, CppCodeGen_Tuple, ListOps, TupleOps}
 import lms.core.stub._
 import lms.macros.SourceContext
 import lms.core.{Backend, virtualize}
@@ -8,7 +8,7 @@ object Main {
     val arg = args(0)
     val snippet = new DslDriverCPP[Int, Unit] with ListOps with TupleOps {
       q =>
-      override val codegen = new DslGenCPP with CppCodeGen_List {
+      override val codegen = new DslGenCPP with CppCodeGen_List with CppCodeGen_Tuple {
         val IR: q.type = q
       }
 
